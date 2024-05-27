@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+
+use Doctrine\ORM\EntityManager;
+use DI\Container;
+
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\Common\DataFixtures\Loader;
+use FinApp\DataFixture\UserDataLoader;
+use FinApp\DataFixture\CategoryDataLoader;
+use FinApp\DataFixture\TransactionDataLoader;
+
+
+/** @var Container $container */
+$container = require_once dirname(__DIR__) . '/bootstrap.php';
+
+$loader = new Loader();
+$loader->addFixture(new UserDataLoader());
+$loader->addFixture(new CategoryDataLoader());
+$loader->addFixture(new TransactionDataLoader());
+
+print("Starting loading fixtures...\n");
+
+$executor = new ORMExecutor($container->get(EntityManager::class), new ORMPurger());
+$executionResult = $executor->execute($loader->getFixtures());
+
+print("Data load completed!\n");
+
