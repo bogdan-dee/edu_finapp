@@ -49,15 +49,15 @@ function CategoryFormEdit({bootstrapModal, emptyForm, formState, setFormState}) 
                         return { ...categories, data: categoriesList};
                     }
                 );
-                showToastSuccess('Category has been updated.');
+                showToastSuccess('Дані про категорію успішно оновлені.');
                 mutate(buildAPIUrl('transactions', {}, {user_id: user.id}));
             } else {
-                showToastError('Error occurred while saving the category.');
+                showToastError('Виникла помилка під час оновлення категорії.');
             }
         }).catch((error) => {
             // TODO: add error handling
             console.log(error);
-            showToastError('Error occurred while saving category.');
+            showToastError('Виникла помилка під час оновлення категорії.');
         }).finally(() => {
             setIsSaving((_) => false);
             bootstrapModal.hide();
@@ -70,7 +70,7 @@ function CategoryFormEdit({bootstrapModal, emptyForm, formState, setFormState}) 
     const optionsForOperationType = operationTypes.map((operationType, index) => {
         return (
             <option key={`edit-category-operation-${operationType}`} value={operationType}>
-                {operationTypesNames[index]}
+                {operationTypesNames[index].replace('income', 'дохід').replace('expense', 'витрати')}
             </option>
         );
     });
@@ -85,14 +85,14 @@ function CategoryFormEdit({bootstrapModal, emptyForm, formState, setFormState}) 
             </div>
             <div className="mb-1">
                 <input type="text" className="form-control" id="edit-name" name="name"
-                       required placeholder="Category name" value={formState.name || ''}
+                       required placeholder="Назва категорії" value={formState.name || ''}
                        onChange={handleChangeEditForm}/>
             </div>
         </form>;
 
     return <ModalEdit
         modalId={modalWindowIds.categoryEdit}
-        modalTitle={`Category ID: ${formState.id}`}
+        modalTitle={`Редагувати категорію з ID: ${formState.id}`}
         modalBody={editFormView}
         formId={`form-${modalWindowIds.categoryEdit}`}
         isFormSaving={isSaving}

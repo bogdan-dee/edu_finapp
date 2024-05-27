@@ -20,28 +20,39 @@ function getListDateFilters(){
         'last_month'
     ]
 }
+function getListDateFiltersTranslated(){
+    return [
+        'Сьогодні',
+        'Вчора',
+        'Цього тижня',
+        'Минулого тижня',
+        'Цього місяця',
+        'Минулого місяця'
+    ]
+}
 
 function Dashboard(){
     const availableDateFilters = getListDateFilters();
+    const availableDateFiltersTranslated = getListDateFiltersTranslated();
     const user = useContext(UserContext);
     const APIUrl = buildAPIUrl('categories', {}, {user_id: user.id});
     const [dateFilter, setDateFilter] = useState(availableDateFilters[0]);
     const { data, error, isLoading, mutate } = useSWR(APIUrl, fetcher, defaultSWROptions);
     if (error) {
-        return <AlertError message="Can not load categories from the server. Please refresh the page or try later."/>
+        return <AlertError message="Не можу завантажити список категорій з серверу. Будь ласка, оновіть сторінку або спробуйте пізніше."/>
     }
 
     console.log("RENDER DASHBOARD");
 
 
-    const dateFilterView = availableDateFilters.map((v) => {
+    const dateFilterView = availableDateFilters.map((v, i) => {
         return (
             <React.Fragment key={`date-filter-${v}`}>
                 <input type="radio" className="btn-check" name="dateFilter" id={`date-filter-${v}`}
                        defaultChecked={(v === dateFilter)}
                        onChange={(e) => setDateFilter((_) => v)}
                 />
-                <label className="btn btn-outline-primary btn-sm text-capitalize" htmlFor={`date-filter-${v}`}>{v.replace('_', ' ')}</label>
+                <label className="btn btn-outline-primary btn-sm text-capitalize" htmlFor={`date-filter-${v}`}>{availableDateFiltersTranslated[i]}</label>
             </React.Fragment>
         )
     });
@@ -50,12 +61,12 @@ function Dashboard(){
         <CategoriesContext.Provider value={data}>
             <div className="row">
                 <div className="col-xl-3 col-lg-4 col-md-5 col-sm-12 mb-4">
-                    <h5>Add new incomes/expenses:</h5>
+                    <h5>Внесіть доходи або витрати:</h5>
                     <hr/>
                     <TransactionFormCreate isCategoriesLoading={isLoading}/>
                 </div>
                 <div className="col mb-2">
-                    <h5>Transactions history:</h5>
+                    <h5>Перегляньте історію транзакцій:</h5>
                     <hr/>
                     <div className="row">
                         <div className="col text-center">
@@ -67,7 +78,7 @@ function Dashboard(){
                     <TransactionList/>
                 </div>
                 <div className="col-xl-3 col-lg-12 col-md-12 col-sm-12">
-                    <h5>Manage categories (folders):</h5>
+                    <h5>Керуйте категоріями:</h5>
                     <hr/>
                     <CategoryList isCategoriesLoading={isLoading}/>
                 </div>

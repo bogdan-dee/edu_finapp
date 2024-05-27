@@ -40,7 +40,7 @@ function CategoryList({isCategoriesLoading}){
 
 
     if (isCategoriesLoading) {
-        return <Loading message="loading categories..."/>
+        return <Loading message="завантажуються категорії..."/>
     }
 
     const operationTypes = getOperationTypes();
@@ -74,7 +74,7 @@ function CategoryList({isCategoriesLoading}){
                         data-bs-toggle="tab" data-bs-target={`#tab-pane-operation-${operationType}`} type="button" role="tab"
                         aria-controls={`tab-pane-operation-${operationType}`} aria-selected="true"
                         onClick={(e) => setActiveTypeTab((prev) => operationType)}
-                >{operationTypesNames[index]}
+                >{operationTypesNames[index].replace('income', 'дохід').replace('expense', 'витрати')}
                 </button>
             </li>
         )

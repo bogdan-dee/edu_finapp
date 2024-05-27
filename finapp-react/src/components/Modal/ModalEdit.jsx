@@ -17,12 +17,12 @@ function ModalEdit({modalId, modalTitle, modalBody, formId, isFormSaving}){
                             <button type="submit" className="btn btn-sm btn-primary" disabled>
                                 <span className="spinner-border spinner-border-sm" role="status"
                                       aria-hidden="true"></span>
-                                <span>Saving...</span>
+                                <span>Зберігаю...</span>
                             </button>
                         ) : (
-                            <button type="submit" form={formId} className="btn btn-sm btn-primary">Save</button>
+                            <button type="submit" form={formId} className="btn btn-sm btn-primary">Зберегти</button>
                         )}
-                        <button type="button" className="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-sm btn-secondary" data-bs-dismiss="modal">Закрити</button>
                     </div>
                 </div>
             </div>

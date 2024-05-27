@@ -12,7 +12,7 @@ function Login(){
     const { data, error, isLoading } = useSWR(APIUrl, fetcher, defaultSWROptions);
 
     if (error) {
-        return <AlertError message="Can not load list of users from the server"/>;
+        return <AlertError message="Не можу завантажити список доступних облікових записів з сервера."/>;
     }
     if (isLoading) {
         return <Loading />;
@@ -31,7 +31,7 @@ function Login(){
             <div className="col"></div>
             <div className="col">
                 <form onSubmit={handleFormSubmit}>
-                    <h1 className="fs-4">Select user to proceed:</h1>
+                    <h1 className="fs-4">Виберіть обліковий запис:</h1>
                     <select
                         className="form-select"
                         aria-label="Default select example"
@@ -40,11 +40,11 @@ function Login(){
                         defaultValue=""
                         onChange={(e) => (setUserId((prev) => (e.target.value)))}
                     >
-                        <option value="">Choose acount from this list</option>
+                        <option value="">виберіть акаунт зі списку</option>
                         {listItems}
                     </select>
                     <div className="d-grid gap-2 mt-1">
-                        <button id="sign-in-btn" className="btn btn-primary" type="submit">Sign In</button>
+                        <button id="sign-in-btn" className="btn btn-primary" type="submit">Увійти</button>
                     </div>
                 </form>
             </div>

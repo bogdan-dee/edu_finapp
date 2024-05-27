@@ -70,14 +70,14 @@ function TransactionFormEdit({bootstrapModal, emptyForm, formState, setFormState
                         return { ...transactions, data: transactionsList};
                     }
                 );
-                showToastSuccess('Transaction has been updated.');
+                showToastSuccess('Дані про транзакцію успішно оновлено.');
             } else {
-                showToastError('Error occurred while saving the transaction.');
+                showToastError('Виникла помилка під час збереження транзакції.');
             }
         }).catch((error) => {
             // TODO: add error handling
             console.log(error);
-            showToastError('Error occurred while saving transaction.');
+            showToastError('Виникла помилка під час збереження транзакції.');
         }).finally(() => {
             setIsSaving((_) => false);
             bootstrapModal.hide();
@@ -90,7 +90,7 @@ function TransactionFormEdit({bootstrapModal, emptyForm, formState, setFormState
     const optionsForOperationType = operationTypes.map((operationType, index) => {
         return (
             <option key={`edit-transaction-operation-${operationType}`} value={operationType}>
-                {operationTypesNames[index]}
+                {operationTypesNames[index].replace('income', 'дохід').replace('expense', 'витрати')}
             </option>
         );
     });
@@ -140,12 +140,12 @@ function TransactionFormEdit({bootstrapModal, emptyForm, formState, setFormState
             <div className="mb-1">
                 <input type="number" className="form-control" id="edit-amount" name="amount"
                        min="0.01" step="0.01" max="10000000"
-                       required placeholder="HOW MUCH ?" value={formState.amount || ''}
+                       required placeholder="Скільки ?" value={formState.amount || ''}
                        onChange={handleChangeEditForm}/>
             </div>
             <div className="mb-1">
                 <textarea className="form-control" id="edit-description" name="description"
-                          rows="2" placeholder="WHAT FOR ?" value={formState.description || ''}
+                          rows="2" placeholder="Короткий опис" value={formState.description || ''}
                           onChange={handleChangeEditForm}>
                 </textarea>
             </div>
@@ -153,7 +153,7 @@ function TransactionFormEdit({bootstrapModal, emptyForm, formState, setFormState
 
     return <ModalEdit
         modalId={modalWindowIds.transactionEdit}
-        modalTitle={`Transaction ID: ${formState.id}`}
+        modalTitle={`Редагування транзакції з ID: ${formState.id}`}
         modalBody={editFormView}
         formId={`form-${modalWindowIds.transactionEdit}`}
         isFormSaving={isSaving}

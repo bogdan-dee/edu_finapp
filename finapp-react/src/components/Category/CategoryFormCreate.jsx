@@ -29,14 +29,14 @@ function CategoryFormCreate(){
             if (response.status === 201 && parseInt(response.data.meta.inserted) === 1) {
                 categories.data.push(response.data.data);
                 mutate(APIUrl, { ...categories, categories});
-                showToastSuccess('New category has been created.');
+                showToastSuccess('Нова категорія успішно створена.');
             } else {
-                showToastError('Error occurred while creating new category.');
+                showToastError('Виникла помилка під час створення категорії.');
             }
         }).catch((error) => {
             // TODO: add error handling
             console.log(error);
-            showToastError('Error occurred while creating new category.');
+            showToastError('Виникла помилка під час створення категорії.');
         }).finally(() => {
             setIsSaving((prev) => false);
             setFormState((prev) => emptyForm);
@@ -63,7 +63,7 @@ function CategoryFormCreate(){
                        onChange={handleFormChange}
                 />
                 <label className="text-uppercase" htmlFor={`add-cat-operation-${operationType}`}>
-                    {operationTypesNames[index]}
+                    {operationTypesNames[index].replace('income', 'дохід').replace('expense', 'витрати')}
                 </label>
             </div>
         );
@@ -74,29 +74,29 @@ function CategoryFormCreate(){
             {isCreateFormOpen ? (
                 <form onSubmit={handleFormSubmit}>
                     <div className="clearfix">
-                        <div className="text-center small mb-1">Choose operation type for new category:</div>
+                        <div className="text-center small mb-1">Виберіть тип операції для нової категорії:</div>
                         {operationTypesRadioButtons}
                     </div>
 
                     <div className="mt-1 mb-2">
                     <input className="form-control form-control-sm" type="text" name="name"
                                onChange={handleFormChange}
-                               placeholder="Category name" value={formState.name || ''} required/>
+                               placeholder="Назва категорії" value={formState.name || ''} required/>
                     </div>
                     <div className="mb-0">
                         { isSaving ? (
                             <button type="submit" className="btn btn-sm btn-dark" disabled>
                                 <span className="spinner-border spinner-border-sm" role="status"
                                       aria-hidden="true"></span>
-                                <span>Saving...</span>
+                                <span>Створюється...</span>
                             </button>
                         ) : (
-                            <button type="submit" className="btn btn-sm btn-dark">Create</button>
+                            <button type="submit" className="btn btn-sm btn-dark">Створити</button>
                         )}
 
                         <button type="button" className="btn btn-sm btn-secondary float-end"
                                 onClick={() => {setIsCreateFormOpen(false); setFormState((_) => emptyForm)}}
-                        >Close
+                        >Закрити
                         </button>
                     </div>
                 </form>
@@ -104,7 +104,7 @@ function CategoryFormCreate(){
                 <div className="d-grid text-center pt-2">
                     <button type="button" className="btn btn-sm btn-dark"
                             onClick={() => setIsCreateFormOpen((_) => true)}>
-                        <i className="bi bi-pencil-square"></i> Add new category
+                        <i className="bi bi-pencil-square"></i> Додати категорію
                     </button>
                 </div>
             ) }

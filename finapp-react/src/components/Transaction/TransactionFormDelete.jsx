@@ -38,15 +38,15 @@ function TransactionFormDelete({bootstrapModal, transaction}) {
                         return { ...transactions, data: transactionsList};
                     }
                 );
-                showToastSuccess('Transaction has been deleted.');
+                showToastSuccess('Транзацію успішно видалено з системи.');
                 mutate(APIUrlCategories); // reload component with categories list
             } else {
-                showToastError('Error occurred while deleting the transaction.');
+                showToastError('Виникла помилка під час видалення транзакції.');
             }
         }).catch((error) => {
             // TODO: add error handling
             console.log(error);
-            showToastError('Error occurred while deleting the transaction.');
+            showToastError('Виникла помилка під час видалення транзакції.');
         }).finally(() => {
             setIsDeleting((prev) => false);
             bootstrapModal.hide();
@@ -60,7 +60,7 @@ function TransactionFormDelete({bootstrapModal, transaction}) {
 
     return <ModalDelete
         modalId={modalWindowIds.transactionDelete}
-        modalTitle={`Delete Transaction ID: ${transaction.id}`}
+        modalTitle={`Видалити транзакцію з ID: ${transaction.id}`}
         modalBody={deleteView}
         handleDelete={handleDelete}
         isDeleting={isDeleting}

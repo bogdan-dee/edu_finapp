@@ -20,8 +20,8 @@ function Container(){
 
         if (error) {
             localStorage.setItem('user_id', JSON.stringify(null));
-            showToastError("Authentication error");
-            return <AlertError message="Can not load profile from the server. Please refresh the page."/>
+            showToastError("Помилка авторизації");
+            return <AlertError message="Не можу завантажити інформацію про обліковий запис. Будь ласка, оновіть сторінку."/>
         }
         if (isLoading) {
             return <Loading/>

@@ -17,7 +17,7 @@ function Category({category, deleteModalBootstrap, setDeleteModalState, editModa
                 <i className="bi bi-folder-fill" title={`ID: ${category.id}`}></i> {category.name}
             </div>
             <div className="col-5 text-end">
-                <span className="badge text-bg-secondary opacity-75" title="Total number of transactions in this category">
+                <span className="badge text-bg-secondary opacity-75" title="Загальна кількість транзакцій в цій категорії">
                     {category.transactions_count}
                 </span>
                 <button className="btn btn-sm" onClick={handleOpenEditModal}>

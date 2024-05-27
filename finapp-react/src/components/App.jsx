@@ -16,7 +16,7 @@ function App() {
 
     return(
         <>
-            <Suspense fallback={<Loading message="Loading..."/>}>
+            <Suspense fallback={<Loading message="Завантажується..."/>}>
                 <Container/>
             </Suspense>
 

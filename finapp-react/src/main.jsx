@@ -1,4 +1,3 @@
-
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './components/App.jsx'
@@ -8,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Icons
 import "bootstrap-icons/font/bootstrap-icons.min.css"
 // Bootstrap Bundle JS
-// import "bootstrap/dist/js/bootstrap.bundle.min";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
 import * as bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min';
 window.bootstrap = bootstrap;

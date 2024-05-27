@@ -35,15 +35,15 @@ function CategoryFormDelete({bootstrapModal, category}) {
                     });
                     return { ...categories, data: updatedList};
                 });
-                showToastSuccess('Category has been deleted.');
+                showToastSuccess('Категорію успішно видалено.');
                 mutate(buildAPIUrl('transactions', {}, {user_id: user.id}));
             } else {
-                showToastError('Error occurred while deleting the category.');
+                showToastError('Виникла помилка під час видалення категорії.');
             }
         }).catch((error) => {
             // TODO: add error handling
             console.log(error);
-            showToastError('Error occurred while deleting the category.');
+            showToastError('Виникла помилка під час видалення категорії.');
         }).finally(() => {
             setIsDeleting((prev) => false);
             bootstrapModal.hide();
@@ -53,15 +53,15 @@ function CategoryFormDelete({bootstrapModal, category}) {
     const deleteView = <>
         {category.transactions_count > 0 ? (
             <div className="text-center mb-2">
-                <strong>WARNING!</strong> This operation will also delete <b>{category.transactions_count}</b> transaction/s.
+                <strong>УВАГА!</strong> Додатково буде видалено <span className="badge text-bg-danger">{category.transactions_count}</span> транзакцій.
             </div>
         ) : (<></>)}
-        <div className="text-center text-danger">Please, confirm you want to delete category: <i>{category.name}</i> ?</div>
+        <div className="text-center text-danger">Підтвердіть видалення категорії: <i>{category.name}</i> ?</div>
     </>;
 
     return <ModalDelete
         modalId={modalWindowIds.categoryDelete}
-        modalTitle={`Delete Category ID: ${category.id}`}
+        modalTitle={`Видалити категорію з ID: ${category.id}`}
         modalBody={deleteView}
         handleDelete={handleDelete}
         isDeleting={isDeleting}

@@ -77,13 +77,13 @@ function TransactionList(){
     }, [data]);
 
     if (isLoading) {
-        return <Loading message="loading transactions..."/>;
+        return <Loading message="Завантажуються транзакції..."/>;
     }
     if (Object.keys(data.data).length === 0) {
         if (isLoading || isValidating) {
-            return <Loading message="loading transactions..."/>;
+            return <Loading message="Завантажуються транзакції..."/>;
         }
-        return <AlertNoRecords message="There are no transactions for this period."/>;
+        return <AlertNoRecords message="В системі немає записів за обраний період."/>;
     }
 
     const totals = calculateTotals(data.data);
@@ -114,13 +114,13 @@ function TransactionList(){
                     )}
                 </div>
                 <div className="col p-2 text-start">
-                    Total income: <span className="badge bg-success">{totals[0]}</span>
+                    Надходження: <span className="badge bg-success">{totals[0]}</span>
                 </div>
                 <div className="col p-2 text-center">
-                    Total expenses: <span className="badge bg-danger">{totals[1]}</span>
+                    Витрати: <span className="badge bg-danger">{totals[1]}</span>
                 </div>
                 <div className="col p-2 text-end">
-                    Balance: <span className="badge bg-secondary">{totals[2]}</span>
+                    Баланс: <span className="badge bg-secondary">{totals[2]}</span>
                 </div>
             </div>
 
@@ -129,10 +129,10 @@ function TransactionList(){
                     <table className="table table-sm align-middle caption-top">
                         <thead>
                         <tr className="table-dark">
-                            <th scope="col">Time</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Description</th>
+                            <th scope="col">Час</th>
+                            <th scope="col">Категорія</th>
+                            <th scope="col">Сума</th>
+                            <th scope="col">Опис</th>
                             <th scope="col" className="text-end pe-4"><i className="bi bi-gear"></i></th>
                         </tr>
                         </thead>

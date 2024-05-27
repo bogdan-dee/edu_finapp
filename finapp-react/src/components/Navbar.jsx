@@ -11,16 +11,16 @@ function Navbar({user}){
             <nav className="navbar bg-light">
                 <div className="container-fluid">
                     <span className="navbar-brand mb-0">
-                        <i className="bi bi-coin"></i> Track Your Finances
+                        <i className="bi bi-coin"></i> Персональні Фінанси
                     </span>
                     { user ? (
                         <div className="d-flex float-end">
                             <div className="p-2">
-                                <i className="bi bi-person"></i> Welcome, {user.username}
+                                <i className="bi bi-person"></i> Вітаю, {user.username}
                             </div>
                             <button
                                 className="btn btn-warning opacity-75 float-end" type="button"
-                                onClick={handleLogOut}>Log Out <i className="bi bi-box-arrow-in-right"></i>
+                                onClick={handleLogOut}>Вийти <i className="bi bi-box-arrow-in-right"></i>
                             </button>
                         </div>
                     ) : ('') }

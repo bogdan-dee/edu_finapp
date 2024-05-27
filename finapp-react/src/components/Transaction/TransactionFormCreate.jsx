@@ -15,7 +15,7 @@ import AlertNoRecords from "../Alert/AlertNoRecords.jsx";
 
 function TransactionFormCreate({isCategoriesLoading}){
     if (isCategoriesLoading) {
-        return <Loading message="loading form..."/>
+        return <Loading message="Завантажується форма..."/>
     }
 
     /** state **/
@@ -33,7 +33,7 @@ function TransactionFormCreate({isCategoriesLoading}){
 
     // handling no categories
     if (Object.keys(categories.data).length === 0) {
-        return <AlertNoRecords message="There are no categories created yet. To begin using the app, please create your first category."/>
+        return <AlertNoRecords message="Створіть свою першу категорію, щоб почати працювати з додатком."/>
     }
 
     /** handlers **/
@@ -59,7 +59,7 @@ function TransactionFormCreate({isCategoriesLoading}){
         e.preventDefault();
         console.log(formState);
         if (! formState.category) {
-            showToastError('You MUST specify some category for your new transaction. Create a new one if there are not any in the list.');
+            showToastError('Ви ПОВИННІ вказати катагерію при створенні транзакції. Додайте категорію, якщо таких ще нема :)');
             return;
         }
 
@@ -76,13 +76,13 @@ function TransactionFormCreate({isCategoriesLoading}){
                     document.getElementById('date-filter-today').click();
                 }
                 mutate(APIUrlCategories); // reload component with categories list
-                showToastSuccess('New transaction has been added.');
+                showToastSuccess('Запис успішно додано.');
             } else {
-                showToastError('Error occurred while adding new transaction.');
+                showToastError('Виникла помилка під час створення нового запису.');
             }
         }).catch((error) => {
             // TODO: add error handling
-            showToastError('Error occurred while adding new transaction.');
+            showToastError('Виникла помилка під час створення нового запису.');
             console.log(error);
         }).finally(() => {
             setIsSaving((prev) => false);
@@ -108,7 +108,7 @@ function TransactionFormCreate({isCategoriesLoading}){
                        onChange={handleFormChange}
                 />
                 <label className="text-uppercase" htmlFor={`add-transaction-operation-${operationType}`}>
-                    {operationTypesNames[index]}
+                    {operationTypesNames[index].replace('income', 'дохід').replace('expense', 'витрати')}
                 </label>
             </div>
         );
@@ -134,7 +134,7 @@ function TransactionFormCreate({isCategoriesLoading}){
         <div>
             <form onSubmit={(e) => handleFormSubmit(e)}>
                 <div className="operation_types clearfix p-2 pt-0 mb-2 text-center">
-                    <div className="text-center small mb-1">Choose operation type for new transaction:</div>
+                    <div className="text-center small mb-1">Виберіть тип операції:</div>
                     {operationTypesRadioButtonsView}
                 </div>
 
@@ -146,12 +146,12 @@ function TransactionFormCreate({isCategoriesLoading}){
                 <div className="mb-1">
                     <input type="number" className="form-control" id="add-amount" name="amount"
                            min="0.01" step="0.01" max="10000000"
-                           required placeholder="HOW MUCH ?" value={formState.amount || ''}
+                           required placeholder="Скільки ?" value={formState.amount || ''}
                            onChange={handleFormChange} ref={amountInputRef}/>
                 </div>
                 <div className="mb-2">
                         <textarea className="form-control" id="add-description" name="description"
-                                  rows="2" placeholder="WHAT FOR ?" value={formState.description || ''}
+                                  rows="2" placeholder="Короткий опис" value={formState.description || ''}
                                   onChange={handleFormChange}>
                         </textarea>
                 </div>
@@ -161,14 +161,14 @@ function TransactionFormCreate({isCategoriesLoading}){
                         <button type="submit" className="btn btn-dark text-uppercase" disabled>
                                 <span className="spinner-border spinner-border-sm" role="status"
                                       aria-hidden="true"></span>
-                            <span>Saving...</span>
+                            <span>Зберігається...</span>
                         </button>
                     ) : (
-                        <button className="btn btn-dark text-uppercase" type="submit">Create transaction</button>
+                        <button className="btn btn-dark text-uppercase" type="submit">Створити транзакцію</button>
                     )}
                     <button className="btn btn-outline-secondary" type="button"
                             onClick={(e) => setFormState((prev) => emptyForm)}>
-                        Clear form
+                        Очистити форму
                     </button>
                 </div>
             </form>

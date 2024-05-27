@@ -17,12 +17,12 @@ function ModalDelete({modalId, modalTitle, modalBody, handleDelete, isDeleting})
                             <button type="submit" className="btn btn-sm btn-danger" disabled>
                                 <span className="spinner-border spinner-border-sm" role="status"
                                       aria-hidden="true"></span>
-                                <span>Deleting...</span>
+                                <span>Видаляю...</span>
                             </button>
                         ) : (
-                            <button type="submit" className="btn btn-sm btn-danger" onClick={handleDelete}>Delete</button>
+                            <button type="submit" className="btn btn-sm btn-danger" onClick={handleDelete}>Видалити</button>
                         )}
-                        <button type="button" className="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-sm btn-secondary" data-bs-dismiss="modal">Закрити</button>
                     </div>
                 </div>
             </div>
