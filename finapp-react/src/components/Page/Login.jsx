@@ -40,7 +40,7 @@ function Login(){
                         defaultValue=""
                         onChange={(e) => (setUserId((prev) => (e.target.value)))}
                     >
-                        <option value="">виберіть акаунт зі списку</option>
+                        <option value="">виберіть користувача зі списку</option>
                         {listItems}
                     </select>
                     <div className="d-grid gap-2 mt-1">
