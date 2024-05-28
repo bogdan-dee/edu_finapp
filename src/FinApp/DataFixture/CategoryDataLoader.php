@@ -12,23 +12,31 @@ class CategoryDataLoader implements FixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $user1 = $manager->getRepository(User::class)->findOneBy(['username' => 'bohdan']);
+        $user1 = $manager->getRepository(User::class)->findOneBy(['username' => 'Богдан']);
+        $expenseCats = [
+            'Комунальні платежі',
+            'Продукти',
+            'Проїзд',
+            'Інше'
+        ];
+        foreach ($expenseCats as $cat) {
+            $catObj = new Category($user1, $cat, OperationTypesStatic::TYPE_EXPENSE);
+            $manager->persist($catObj);
+        }
+        unset($catObj);
 
-        $category_exp1 = new Category($user1, 'Продукти', OperationTypesStatic::TYPE_EXPENSE);
-        $category_exp2 = new Category($user1, 'Проїзд', OperationTypesStatic::TYPE_EXPENSE);
-        $category_exp3 = new Category($user1, 'Обід', OperationTypesStatic::TYPE_EXPENSE);
-
-        $category_inc1 = new Category($user1, 'Робота', OperationTypesStatic::TYPE_INCOME);
-        $category_inc2 = new Category($user1, 'Фріланс', OperationTypesStatic::TYPE_INCOME);
-        $category_inc3 = new Category($user1, 'Оренда', OperationTypesStatic::TYPE_INCOME);
-
-        $manager->persist($category_exp1);
-        $manager->persist($category_exp2);
-        $manager->persist($category_exp3);
-        $manager->persist($category_inc1);
-        $manager->persist($category_inc2);
-        $manager->persist($category_inc3);
+        $incomeCats = [
+            'Фріланс',
+            'Робота',
+            'Інше'
+        ];
+        foreach ($incomeCats as $cat) {
+            $catObj = new Category($user1, $cat, OperationTypesStatic::TYPE_INCOME);
+            $manager->persist($catObj);
+        }
+        unset($catObj);
 
         $manager->flush();
+        $manager->clear();
     }
 }
