@@ -1,1 +1,5 @@
 .idea
+
+finapp-react/node_modules
+
+vendor

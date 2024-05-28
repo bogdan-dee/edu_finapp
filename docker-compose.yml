@@ -1,0 +1,50 @@
+services:
+  nginx:
+    depends_on:
+      - php
+    image: nginx:1.25.5-alpine
+    container_name: finapp-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./.docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./.docker/nginx/ssl:/etc/nginx/ssl
+      - ./.docker/nginx/fastcgi_params:/etc/nginx/fastcgi_params
+      - .:/var/www/html
+    networks:
+      - app-network
+
+  php:
+    build: .docker/php
+    container_name: finapp-php
+    depends_on:
+      - mysql
+    restart: unless-stopped
+    env_file: ./.docker/.env-local
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./.docker/php/conf.d/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - .:/var/www/html
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: finapp-mysql
+    restart: unless-stopped
+    env_file: ./.docker/.env-local
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
+    driver: bridge
