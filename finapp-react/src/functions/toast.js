@@ -16,6 +16,7 @@ export function showToastSuccess(message){
     let toast = bootstrap.Toast.getOrCreateInstance(elem);
     document.getElementById(`${toastIds.success}-body`).innerHTML = message || '';
     toast.show();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 export function showToastError(message){
@@ -23,4 +24,5 @@ export function showToastError(message){
     let toast = bootstrap.Toast.getOrCreateInstance(elem);
     document.getElementById(`${toastIds.error}-body`).innerHTML = message || '';
     toast.show();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
