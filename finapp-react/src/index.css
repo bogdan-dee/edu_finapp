@@ -1,10 +1,6 @@
 /** --- GENERAL --- **/
 #root {
-  min-width: 525px !important;
-}
-
-#root section {
-  min-height: 85vh;
+  min-width: 400px !important;
 }
 
 .white-space {

@@ -7,7 +7,7 @@ docker composer up -d
 ---
 3. Create DB schema:
 ```shell
-docker exec -it finapp-php php bin/doctrine orm:schema-tool:update
+docker exec -it finapp-php php bin/doctrine orm:schema-tool:create
 ```
 ---
 4. Load fixtures:

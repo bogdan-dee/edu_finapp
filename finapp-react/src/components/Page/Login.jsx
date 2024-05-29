@@ -29,7 +29,7 @@ function Login(){
     return (
         <div className="row">
             <div className="col"></div>
-            <div className="col">
+            <div className="col-sm-12 col-md-8 col-lg-6 col-xl-4">
                 <form onSubmit={handleFormSubmit}>
                     <h1 className="fs-4">Виберіть обліковий запис:</h1>
                     <select
