@@ -13,7 +13,7 @@ export const defaultSWROptions = {
     errorRetryCount: 1
 };
 
-export const APIEndpoint = 'http://finapp.local';
+export const APIEndpoint = 'http://fe-api.elinso.net';
 export const APIMethods = {
     users: '/users/',
     user: '/users/:id/',
