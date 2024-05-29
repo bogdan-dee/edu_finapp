@@ -20,7 +20,7 @@ function App() {
                 <Container/>
             </Suspense>
 
-            <div className="toast-container top-0 end-0 p-3">
+            <div className="toast-container top-0 end-0 p-3 pt-5">
                 <ToastSuccess/>
                 <ToastError/>
             </div>
